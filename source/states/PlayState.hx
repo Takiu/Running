@@ -12,7 +12,9 @@ import flixel.math.FlxPoint;
 import flixel.util.FlxTimer;
 import flixel.system.FlxSound;
 import sprites.Player;
+import sprites.Player2;
 import sprites.Plataform;
+import sprites.Ene1;
 
 class PlayState extends FlxState
 {
@@ -26,6 +28,10 @@ class PlayState extends FlxState
 	private var themeSong:FlxSound;
 	private var powerUpSound:FlxSound;
 	private var plataforms:FlxTypedGroup<Plataform>;
+	private var ene: FlxTypedGroup<Ene1>;
+	private var dific : Int;
+	private var play2 : Player2;	
+	private var eneSec: Ene1;
 	
 	override public function create():Void
 	{
@@ -33,8 +39,9 @@ class PlayState extends FlxState
 		//themeSong = FlxG.sound.load(AssetPaths.ThemeSong__wav, 1, true);
 		//themeSong.play();
 		drawEntities ("player");
-		FlxG.camera.setScrollBounds(0, 2560, 0, 240);
-		FlxG.camera.scroll = new FlxPoint(player.x,player.y);
+		FlxG.camera.setScrollBounds(0, 5120, 0, 240);
+		FlxG.camera.scroll = new FlxPoint(player.x, player.y);
+		FlxG.worldBounds.set(0, 0,5120, 240);
 		scroll = true;				
 		scoreText = new FlxText(80, Reg.ScreenHeight - 20, "Score : " + Reg.score);
 		add(scoreText);
@@ -51,38 +58,42 @@ class PlayState extends FlxState
 		plat.x = 0;
 		plat.y = 200;
 		plataforms.add(plat);
-		add(plataforms);	
-		FlxG.watch.add(player,"x");
+		add(plataforms);		
+		
+		ene = new FlxTypedGroup<Ene1>();
+		add(ene);
+		dific = 200;		
+		drawEntities ("player2");
+		
 		
 	}
 	
 	var timePlat : Int = 140;
+	var timeEne : Int = 0;
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
 		
 		FlxG.collide(plataforms, player);
-		
+		FlxG.collide(plataforms, ene);
 		if (player.alive)
 		{
 			CameraMovement();
-			PlayerMovementInCameraBounds();		
-	 
-			if (player.isTouching(FlxObject.FLOOR))
+			Collisions();
+			Player2Movi();
+			PlayerMovementInCameraBounds();		 
+			if (player.isTouching(FlxObject.FLOOR) && FlxG.keys.pressed.UP)
 			{				
-				player.velocity.y = 0;
-				if (FlxG.keys.pressed.UP)
-				{
-					player.velocity.y = -250;
-				}
-			}
-			
+				player.velocity.y = -320;
+			}			
 		}
-		if (timePlat >= 100)
+		
+		if (timePlat >= 140)
 		{
 			drawEntities("plataform");
 			timePlat = 0;			
 		}
+		
 		for (i in plataforms)
 		{
 			if (!InCameraBounds(i))
@@ -93,6 +104,8 @@ class PlayState extends FlxState
 		}
 		
 		timePlat++;
+		ActivateEnemies();
+		timeEne++;
 		
 		if (FlxG.keys.justPressed.R)
 			FlxG.resetState();
@@ -100,7 +113,42 @@ class PlayState extends FlxState
 	
 	private function ActivateEnemies()
 	{
-		//Agregar enemigos aca
+		if (timeEne >= dific)
+		{
+			timeEne = 0;
+			if (dific > 130){
+				dific -= 10;
+			}
+			else if (dific > 80){
+				dific -= 5;
+			}
+			else if (dific > 30){
+				dific -= 2;
+			}
+			drawEntities("enemigo");
+		}
+		for (i in ene)
+		{
+			if (!InCameraBounds(i))
+			{
+				ene.remove(i);
+				i.destroy();
+			}
+			else
+			{				
+				if (!i.isTouching(FlxObject.FLOOR) && !i.enSalto)
+				{					
+					i.velocity.y = -320;
+					i.velocity.x = -50;
+					i.enSalto = true;
+				}
+				if (i.isTouching(FlxObject.FLOOR) && i.enSalto)
+				{	
+					i.enSalto = false;
+					i.velocity.x = -30;
+				}				
+			}
+		}	
 	}
 	
 	private function GameOver(victory:Bool):Void
@@ -130,31 +178,59 @@ class PlayState extends FlxState
 	
 	private function Collisions():Void
 	{	
-		//Aca van las colisiones
+		FlxG.overlap(play2, ene, null, CollsionHandler);
+		FlxG.overlap(player, ene, null, CollsionHandler);		
 	}
 	
-	private function CollsionHandler(Sprite1:FlxObject, Sprite2:FlxObject):Bool
+	private function CollsionHandler(s1:FlxObject, s2:FlxObject):Bool
 	{
 		//La funcion que hace dependiendo de los sprites
+		var sprite1:String = Type.getClassName(Type.getClass(s1));
+		var sprite2:String = Type.getClassName(Type.getClass(s2));
+		
+		if (sprite1 == "sprites.Player2" && sprite2 == "sprites.Ene1")
+		{
+			if (!play2.secue)
+			{
+				var enemy: Dynamic = cast(s2, Ene1);
+				eneSec = enemy;
+				play2.secue = true;
+			}
+			return true;
+		}
+		
+		if (sprite1 == "sprites.Player" && sprite2 == "sprites.Ene1")
+		{
+			if (FlxG.keys.pressed.X && !play2.secue)
+			{
+				var enemy: Dynamic = cast(s2, Ene1);
+				ene.remove(enemy);
+				enemy.kill;
+			}
+			return true;
+		}		
+		
 		return false;
 	}
 	
-	private function PllayerStageCollision():Void
+	private function Player2Movi():Void
 	{
-		//Cambiarlo por el piso y que pierda si cae o le sacan a la minita
-		/*
-		if (player.isTouching(FlxObject.ANY))
+		if (play2.alive)
 		{
-			if (Reg.playerLives > 0)
+			if (!play2.secue)
 			{
-				Reg.playerLives--;
-				RestartLevel();
+				play2.x = player.x - 20;
+				play2.y = player.y;
 			}
-			else
-			{
-				GameOver(false);
+			else{
+				play2.x = eneSec.x + 20;
+				play2.y = eneSec.y;
+				if (play2.x <= FlxG.camera.scroll.x -40){
+					GameOver(false);
+					trace("sasa");
+				}
 			}
-		}*/
+		}
 	}
 	
 	private function PlayerMovementInCameraBounds():Void
@@ -171,21 +247,29 @@ class PlayState extends FlxState
 		}
 		if (player.y > newScroll.y + Reg.ScreenHeight - player.height)
 		{
-			player.y = newScroll.y + Reg.ScreenHeight - player.height;	
+			GameOver(false);	
 		}
 		if (player.y < newScroll.y)
 		{
 			player.y = newScroll.y;
 		}
 	}
-	
+	var sasa : Bool = false;
 	private function CameraMovement():Void
 	{
 		var newScroll = FlxG.camera.scroll;
 		if (scroll){
-			if (newScroll.x + 256 >= 2560)
-			{
-				//Llego al final
+			
+			
+			if (newScroll.x + 256 >= 4800 && !sasa)
+			{				
+				var plat:Plataform;
+				sasa = true;
+				plat = new Plataform(1);				
+				plat.makeGraphic(300, 40, 0xFFFF4502);
+				plat.x = 4820;
+				plat.y = 200;
+				plataforms.add(plat);
 			}
 			else
 			{
@@ -198,18 +282,6 @@ class PlayState extends FlxState
 		}
 	}
 	
-	private function EnemiesInCamera()
-	{
-		/*for (enemy in enemiesType1)
-		{
-			if (enemy.alive && !InCameraBounds(enemy))
-			{
-				enemiesType1.remove(enemy);
-				enemy.kill();
-			}
-		}*/
-	}
-	
 	private function InCameraBounds(sprite:FlxSprite):Bool
 	{
 		//Revisa si esta dentro de la camara
@@ -219,7 +291,7 @@ class PlayState extends FlxState
 		{
 			return false;
 		}
-		if (sprite.x < newScroll.x -400)
+		if (sprite.x < newScroll.x - 400)
 		{
 			return false;
 		}
@@ -241,32 +313,34 @@ class PlayState extends FlxState
 			var X:Float = 0;
 			var Y:Float = 180;
 			
-			player = new Player(X, Y);
+			player = new Player(X,Y);
 			add(player);
 		}
 		
+		var newScroll = FlxG.camera.scroll;
 		if (entityName == "plataform")
-		{		
-			var newScroll = FlxG.camera.scroll;
-			
+		{					
 			var plat:Plataform;
-			for(i in 0...3){								
+			for(i in 0...2){								
 				plat = new Plataform(i,newScroll.x+256);				
 				plataforms.add(plat);
 			}
 		}
 		
-		/*
-		if (entityName == "enemy1")
-		{
-			var X:Float = Std.parseFloat(entityData.get("x"));
-			var Y:Float = Std.parseFloat(entityData.get("y"));
-			
+		
+		if (entityName == "enemigo")
+		{			
 			var enemy:Ene1;
-			enemy = new Ene1(X, Y);
-			enemy.kill();
-			enemiesType1.add(enemy);
+			enemy = new Ene1(newScroll.x+256, 110);
+			ene.add(enemy);
 		}
-		*/
+		
+		if (entityName == "player2")
+		{
+			var X:Float = player.x - 22;
+			var Y:Float = player.y;			
+			play2 = new Player2(X,Y);
+			add(play2);
+		}
 	}
 }

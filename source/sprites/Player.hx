@@ -20,8 +20,8 @@ class Player extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0) 
 	{
 		super(X, Y);
-		loadGraphic(AssetPaths.Nave__png, false, 16, 16);
-		acceleration.y = 400;
+		makeGraphic(20, 20, 0xFFFFFFFF);
+		acceleration.y = 700;
 	}
 	
 	override public function update(elapsed:Float):Void 

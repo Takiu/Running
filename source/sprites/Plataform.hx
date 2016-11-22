@@ -21,25 +21,22 @@ class Plataform extends FlxSprite
 		switch(num)
 		{
 			case 0:
-				this.y = 220;
+				this.y = 200;
 			case 1:
-				this.y = 140;
-			case 2:
-				this.y = 60;
+				this.y = 130;
 		}
 		switch(r.int(1, 3))
 		{
 			case 1:
-				xlar = 120;
-				this.x += 60;
+				xlar = 110;
 			case 2:
 				xlar = 80;
-				this.x += 40;
+				this.x += 15;
 			case 3:
-				xlar = 60;
-				this.x += 30;
+				xlar = 40;
+				this.x += 25;
 		}
-		makeGraphic(xlar, 20, 0xFF448801);
+		makeGraphic(xlar, 10, 0xFF448801);
 		immovable = true;
 	}
 	
