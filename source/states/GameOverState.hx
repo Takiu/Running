@@ -10,10 +10,6 @@ import flixel.math.FlxMath;
 import states.PlayState;
 import flixel.system.FlxSound;
 
-/**
- * ...
- * @author Maximiliano Viñas Craba
- */
 class GameOverState extends FlxState
 {	
 	
@@ -24,7 +20,7 @@ class GameOverState extends FlxState
 	private var _victory:Bool;
 	private var replayText:FlxText;
 	private var optionPointer:FlxSprite;
-	private var granyan:FlxSprite;
+	private var image:FlxSprite;
 	
 	public function new(victory:Bool) 
 	{
@@ -38,40 +34,38 @@ class GameOverState extends FlxState
 
 		gameOver = new FlxText(20, 50, 0, null, 20);
 		
-		granyan = new FlxSprite();
+		image = new FlxSprite();
 		
 		if (_victory)
 		{
-			gameOver.text = "A WINNER IS YOU!";
-			granyan.loadGraphic(AssetPaths.GranyanDefeated__png);
+			gameOver.text = "¡¡WINNER!!";
+			image.makeGraphic(32, 32, 0xFFFFFFFF);
 		}
 		else
 		{
 			gameOver.text = "GAME OVER";
-			granyan.loadGraphic(AssetPaths.Granyan__png, true, 32, 32);
-			granyan.animation.add("titleAnimation", [0, 1], 5, true);
-			granyan.animation.play("titleAnimation");
+			image.makeGraphic(32, 32, 0xFFFFFFFF);
 		}
 		gameOver.alignment = CENTER;
 		gameOver.screenCenter(X);
-		gameOver.color = 0xFFc300ff;
+		gameOver.color = 0xFFd8d8d8;
 		
 		add(gameOver);
 		
-		granyan.x = (FlxG.width / 2) - granyan.width / 2 ;
-		granyan.y = 120;
-		add(granyan);
+		image.x = (FlxG.width / 2) - image.width / 2 ;
+		image.y = 120;
+		add(image);
 		
 		scoreTxt = new FlxText(0, 80, 0, "Score : " + Reg.score, 12);
 		scoreTxt.alignment = CENTER;
 		scoreTxt.screenCenter(X);
-		scoreTxt.color = 0xFFc300ff;
+		scoreTxt.color = 0xFFd8d8d8;
 		add(scoreTxt);
 		
 		highScoreTxt = new FlxText(0, 95, 0, "Highscore : " + Reg.highScore , 12);
 		highScoreTxt.alignment = CENTER;
 		highScoreTxt.screenCenter(X);
-		highScoreTxt.color = 0xFFc300ff;
+		highScoreTxt.color = 0xFFd8d8d8;
 		add(highScoreTxt);
 		
 		replayText = new FlxText(0, 0, "REPLAY");
@@ -80,7 +74,7 @@ class GameOverState extends FlxState
 		add(replayText);
 		
 		optionPointer = new FlxSprite();
-		optionPointer.loadGraphic(AssetPaths.Nave__png);
+		optionPointer.makeGraphic(30,10,0xFFF7FE2E);
 		optionPointer.x = replayText.x - optionPointer.width - 5;
 		optionPointer.y = replayText.y - 1;
 		add(optionPointer);

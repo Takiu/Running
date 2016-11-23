@@ -7,15 +7,10 @@ import flixel.FlxG;
 import flixel.system.FlxSound;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.FlxObject;
-/**
- * ...
- * @author Maximiliano Viñas Craba
- */
+
 class Player extends FlxSprite
 {
 	public var speed:Int = Reg.playerSpeed;
-	public var bullets:FlxTypedGroup<Bullet>;
-	private var shootInterval:Int = 0;
 	
 	public function new(?X:Float=0, ?Y:Float=0) 
 	{
@@ -48,16 +43,6 @@ class Player extends FlxSprite
 			{
 				this.y += speed;
 			}
-			/*
-			if (FlxG.keys.justPressed.Z)
-			{
-				if (shootInterval > 30)
-				{
-					Shoot();
-					shootInterval = 0;
-				}
-			}
-			*/
 		}
 	}	
 }

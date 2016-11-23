@@ -4,10 +4,6 @@ import flixel.FlxSprite;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import flixel.math.FlxRandom;
 
-/**
- * ...
- * @author ...
- */
 class Plataform extends FlxSprite
 {
 	private var r : FlxRandom;
@@ -33,8 +29,8 @@ class Plataform extends FlxSprite
 				xlar = 80;
 				this.x += 15;
 			case 3:
-				xlar = 40;
-				this.x += 25;
+				xlar = 60;
+				this.x += 30;
 		}
 		makeGraphic(xlar, 10, 0xFF448801);
 		immovable = true;

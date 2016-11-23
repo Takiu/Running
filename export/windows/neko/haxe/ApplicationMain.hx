@@ -57,7 +57,7 @@ class ApplicationMain {
 				
 				#if mobile
 				
-				forceWidth = 512;
+				forceWidth = 1024;
 				forceHeight = 480;
 				
 				container = new flash.display.Sprite ();
@@ -127,7 +127,7 @@ class ApplicationMain {
 				}
 				
 			},
-			512, 480, 
+			1024, 480, 
 			60, 
 			0,
 			(true ? flash.Lib.HARDWARE : 0) |
@@ -254,7 +254,7 @@ class ScaledStage extends flash.display.Stage {
 	
 	private override function get_stageWidth ():Int {
 		
-		return 512;
+		return 1024;
 	
 	}
 	
@@ -325,11 +325,11 @@ class ApplicationMain {
 		wx.App.boot (function () {
 			
 			
-			frame = wx.Frame.create (null, null, "Gradius", null, { width: 512, height: 480 });
+			frame = wx.Frame.create (null, null, "Gradius", null, { width: 1024, height: 480 });
 			
 			
 			#if openfl
-			var stage = wx.NMEStage.create (frame, null, null, { width: 512, height: 480 });
+			var stage = wx.NMEStage.create (frame, null, null, { width: 1024, height: 480 });
 			#end
 			
 			var hasMain = false;
@@ -515,7 +515,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "250",
+			build: "313",
 			company: "HaxeFlixel",
 			file: "Gradius",
 			fps: 60,
@@ -539,7 +539,7 @@ class ApplicationMain {
 					stencilBuffer: false,
 					title: "Gradius",
 					vsync: true,
-					width: 512,
+					width: 1024,
 					x: null,
 					y: null
 				},
@@ -549,7 +549,7 @@ class ApplicationMain {
 		
 		#if (js && html5)
 		#if (munit || utest)
-		openfl.Lib.embed (null, 512, 480, "null");
+		openfl.Lib.embed (null, 1024, 480, "null");
 		#end
 		#else
 		create ();

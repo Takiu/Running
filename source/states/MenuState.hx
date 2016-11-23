@@ -17,19 +17,19 @@ class MenuState extends FlxState
 	private var instructionsTxt:FlxText;
 	private var playText:FlxText;
 	private var optionPointer:FlxSprite;
-	private var granyan:FlxSprite;
+	private var image:FlxSprite;
 	
 	override public function create():Void
 	{
 		FlxG.camera.fade(FlxColor.BLACK, 1, true);
 		super.create();
-		NameTxt = new FlxText(20, 50, 0, "GRANYAN", 40);
+		NameTxt = new FlxText(20, 50, 0, "CityRun", 40);
 		NameTxt.alignment = CENTER;
 		NameTxt.screenCenter(X);
-		NameTxt.color = 0xFFc300ff;
+		NameTxt.color = 0xFFd8d8d8;
 		add(NameTxt);
 		
-		instructionsTxt = new FlxText(0, 150, 0, "MOVE WITH THE ARROW KEYS\nFIRE WITH Z\nACTIVATE POWERUPS WITH X", 8);
+		instructionsTxt = new FlxText(0, 150, 0, "Move: Arrow keys\n Attack: X", 8);
 		instructionsTxt.alignment = CENTER;
 		instructionsTxt.screenCenter(X);
 		add(instructionsTxt);
@@ -39,16 +39,14 @@ class MenuState extends FlxState
 		playText.y = FlxG.height - playText.height - 10;
 		add(playText);
 		
-		granyan = new FlxSprite();
-		granyan.loadGraphic(AssetPaths.Granyan__png, true, 32, 32);
-		granyan.animation.add("titleAnimation", [0, 1], 5, true);
-		granyan.animation.play("titleAnimation");
-		granyan.x = (FlxG.width / 2) - granyan.width / 2 ;
-		granyan.y = 100;
-		add(granyan);
+		image = new FlxSprite();
+		image.makeGraphic(32, 32, 0xFFFFFFFF);
+		image.x = (FlxG.width / 2) - image.width / 2 ;
+		image.y = 100;
+		add(image);
 		
 		optionPointer = new FlxSprite();
-		optionPointer.loadGraphic(AssetPaths.Nave__png);
+		optionPointer.makeGraphic(30,10,0xFFF7FE2E);
 		optionPointer.x = playText.x - optionPointer.width - 5;
 		optionPointer.y = playText.y - 1;
 		add(optionPointer);
