@@ -26,7 +26,7 @@ class ApplicationMain {
 	
 	public static function main () {
 		
-		flash.Lib.setPackage ("HaxeFlixel", "Gradius", "com.example.myapp", "0.0.1");
+		flash.Lib.setPackage ("HaxeFlixel", "Running", "com.example.myapp", "0.0.1");
 		
 		
 		#if ios
@@ -40,7 +40,7 @@ class ApplicationMain {
 		telemetryConfig = new hxtelemetry.HxTelemetry.Config ();
 		telemetryConfig.allocations = true;
 		telemetryConfig.host = "localhost";
-		telemetryConfig.app_name = "Gradius";
+		telemetryConfig.app_name = "Running";
 		#end
 		
 		
@@ -141,7 +141,7 @@ class ApplicationMain {
 			(false ? flash.Lib.FULLSCREEN : 0) |
 			(0 == 4 ? flash.Lib.HW_AA_HIRES : 0) |
 			(0 == 2 ? flash.Lib.HW_AA : 0),
-			"Gradius",
+			"Running",
 			null
 			#if mobile, ScaledStage #end
 		);
@@ -318,14 +318,14 @@ class ApplicationMain {
 	public static function main () {
 		
 		#if openfl
-		flash.Lib.setPackage ("HaxeFlixel", "Gradius", "com.example.myapp", "0.0.1");
+		flash.Lib.setPackage ("HaxeFlixel", "Running", "com.example.myapp", "0.0.1");
 		
 		#end
 		
 		wx.App.boot (function () {
 			
 			
-			frame = wx.Frame.create (null, null, "Gradius", null, { width: 1024, height: 480 });
+			frame = wx.Frame.create (null, null, "Running", null, { width: 1024, height: 480 });
 			
 			
 			#if openfl
@@ -515,11 +515,11 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "378",
+			build: "2",
 			company: "HaxeFlixel",
-			file: "Gradius",
+			file: "Running",
 			fps: 60,
-			name: "Gradius",
+			name: "Running",
 			orientation: "landscape",
 			packageName: "com.example.myapp",
 			version: "0.0.1",
@@ -537,7 +537,7 @@ class ApplicationMain {
 					parameters: "{}",
 					resizable: true,
 					stencilBuffer: false,
-					title: "Gradius",
+					title: "Running",
 					vsync: true,
 					width: 1024,
 					x: null,
