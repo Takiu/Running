@@ -28,38 +28,50 @@ class PlayState extends FlxState
 	private var themeSong:FlxSound;
 	private var powerUpSound:FlxSound;
 	private var plataforms:FlxTypedGroup<Plataform>;
+	private var plataFondo:FlxTypedGroup<FlxSprite>;
 	private var ene: FlxTypedGroup<Ene1>;
 	private var dific : Int;
 	private var play2 : Player2;	
 	private var eneSec: Ene1;
 	private var eneSpawn : Bool = true;
 	private var xRecorrido : Float = 0;
+	private var fondo : FlxSprite;
+	
 	override public function create():Void
 	{
 		super.create();
+		
+		fondo = new FlxSprite(0,0);
+		fondo.loadGraphic(AssetPaths.BackgroundCity__png, false, 512, 240);
+		add(fondo);
+		
+		plataFondo = new FlxTypedGroup<FlxSprite>();
+		add(plataFondo);
+		
 		drawEntities ("player");
 		FlxG.camera.setScrollBounds(0, 5120, 0, 240);
-		FlxG.camera.scroll = new FlxPoint(player.x, player.y);
+		FlxG.camera.scroll = new FlxPoint(player.x, 0);
 		FlxG.worldBounds.set(0, 0,5120, 240);
 		scroll = true;				
 		scoreText = new FlxText(10, 10, "Score : " + Reg.score);
+		scoreText.color = 0xFF000000;
 		add(scoreText);
 		highScoreText = new FlxText(100, 10, "HighScore : " + Reg.highScore);
+		highScoreText.color = 0xFF000000;
 		add(highScoreText);
 		
 		Reg.playerCoords = new FlxPoint(player.x, player.y);
 		
-		plataforms = new FlxTypedGroup<Plataform>();		
-		FlxG.watch.add(player, "x");
+		plataforms = new FlxTypedGroup<Plataform>();	
 		var plat:Plataform;			
 		plat = new Plataform(1);				
-		plat.makeGraphic(300, 40, 0xFFFF4502);
+		plat.loadGraphic(AssetPaths.BaseIniFin__png,false,300,40);
 		plat.x = 0;
 		plat.y = 200;
-		plataforms.add(plat);
+		plataforms.add(plat);		
 		add(plataforms);
 		
-		plat = new Plataform(0);				
+		plat = new Plataform(1);				
 		plat.x = 380;
 		plat.y = 200;
 		plataforms.add(plat);
@@ -67,8 +79,7 @@ class PlayState extends FlxState
 		ene = new FlxTypedGroup<Ene1>();
 		add(ene);
 		dific = 200;		
-		drawEntities ("player2");
-		
+		drawEntities ("player2");		
 		
 	}
 	
@@ -95,6 +106,7 @@ class PlayState extends FlxState
 			if (player.isTouching(FlxObject.FLOOR) && FlxG.keys.pressed.UP)
 			{				
 				player.velocity.y = -320;
+				player.animation.play("Jump");
 			}			
 		}
 		
@@ -141,7 +153,7 @@ class PlayState extends FlxState
 		for (i in ene)
 		{
 			if (!InCameraBounds(i))
-			{
+			{				
 				ene.remove(i);
 				i.destroy();
 			}
@@ -238,7 +250,7 @@ class PlayState extends FlxState
 			else{
 				play2.x = eneSec.x + 20;
 				play2.y = eneSec.y;
-				if (play2.x <= FlxG.camera.scroll.x -40){
+				if (play2.x <= FlxG.camera.scroll.x -40 || play2.y >= 240){
 					GameOver(false);
 				}
 			}
@@ -257,7 +269,7 @@ class PlayState extends FlxState
 		{
 			player.x = newScroll.x;
 		}
-		if (player.y > newScroll.y + Reg.ScreenHeight - player.height)
+		if (player.y > newScroll.y + Reg.ScreenHeight + player.height)
 		{
 			GameOver(false);	
 		}
@@ -282,7 +294,7 @@ class PlayState extends FlxState
 				var plat:Plataform;
 				sasa = true;
 				plat = new Plataform(1);				
-				plat.makeGraphic(300, 40, 0xFFFF4502);
+				plat.loadGraphic(AssetPaths.BaseIniFin__png,false,300,40);
 				plat.x = 4820;
 				plat.y = 200;
 				plataforms.add(plat);
@@ -295,6 +307,7 @@ class PlayState extends FlxState
 				player.x += screenSpeed;
 				scoreText.x += screenSpeed;
 				highScoreText.x += screenSpeed;
+				fondo.x += screenSpeed;
 			}			
 		}
 	}
@@ -312,12 +325,13 @@ class PlayState extends FlxState
 		{
 			return false;
 		}
-		if (sprite.y + sprite.height > newScroll.y + Reg.ScreenHeight)
+		if (sprite.y + sprite.height > newScroll.y + Reg.ScreenHeight + sprite.height)
 		{
 			return false;
 		}
 		if (sprite.y < newScroll.y)
 		{
+			trace(newScroll.y);
 			return false;
 		}
 		return true;
@@ -328,7 +342,7 @@ class PlayState extends FlxState
 		if (entityName == "player")
 		{
 			var X:Float = 0;
-			var Y:Float = 180;
+			var Y:Float = 160;
 			
 			player = new Player(X,Y);
 			add(player);
@@ -338,9 +352,10 @@ class PlayState extends FlxState
 		if (entityName == "plataform")
 		{					
 			var plat:Plataform;
-			for(i in 0...2){								
+			for (i in 0...2){
 				plat = new Plataform(i,newScroll.x+530);				
-				plataforms.add(plat);
+				if(i == 0) plataFondo.add(plat.secBase);
+				plataforms.add(plat);				
 			}
 		}
 		

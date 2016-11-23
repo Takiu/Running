@@ -12,9 +12,12 @@ class Ene1 extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{		
 		super(X, Y, SimpleGraphic);	
-		makeGraphic(20, 20, 0xFFFF0000);
+		loadGraphic(AssetPaths.Enemy__png, true, 18, 26);
+		animation.add("Run", [0, 1, 2, 1], 10, true);
+		animation.play("Run");
 		velocity.x = -30;
 		acceleration.y = 700;
+		
 		r = new FlxRandom();
 		if (r.int(1, 2) == 1){
 			this.y = 110;

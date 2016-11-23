@@ -15,7 +15,10 @@ class Player extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0) 
 	{
 		super(X, Y);
-		makeGraphic(20, 20, 0xFFFFFFFF);
+		loadGraphic(AssetPaths.Player__png, true, 16, 26);
+		animation.add("Run", [0, 1, 2, 1], 10, true);
+		animation.add("Jump", [2], 30, false);
+		animation.play("Run");
 		acceleration.y = 700;
 	}
 	
@@ -29,19 +32,18 @@ class Player extends FlxSprite
 	{
 		if (this.alive)
 		{
+			flipX = false;
 			if (FlxG.keys.pressed.LEFT)
 			{
 				this.x -= speed;
+				animation.play("Run");
+				flipX = true;
 			}
 	 
 			if (FlxG.keys.pressed.RIGHT)
 			{
 				this.x += speed;
-			}
-	 
-			if (FlxG.keys.pressed.DOWN)
-			{
-				this.y += speed;
+				animation.play("Run");
 			}
 		}
 	}	
