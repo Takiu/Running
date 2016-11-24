@@ -28,6 +28,8 @@ class AssetData {
 			type.set ("assets/images/BackgroundCity.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/BaseIniFin.png", "assets/images/BaseIniFin.png");
 			type.set ("assets/images/BaseIniFin.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/Boss.png", "assets/images/Boss.png");
+			type.set ("assets/images/Boss.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/Enemy.png", "assets/images/Enemy.png");
 			type.set ("assets/images/Enemy.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/FondoPlatChic.png", "assets/images/FondoPlatChic.png");
@@ -36,6 +38,14 @@ class AssetData {
 			type.set ("assets/images/FondoPlatLarg.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/FondoPlatMed.png", "assets/images/FondoPlatMed.png");
 			type.set ("assets/images/FondoPlatMed.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/Heart.png", "assets/images/Heart.png");
+			type.set ("assets/images/Heart.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/Malos.png", "assets/images/Malos.png");
+			type.set ("assets/images/Malos.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/P1A.png", "assets/images/P1A.png");
+			type.set ("assets/images/P1A.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/P2A.png", "assets/images/P2A.png");
+			type.set ("assets/images/P2A.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/PlatChic.png", "assets/images/PlatChic.png");
 			type.set ("assets/images/PlatChic.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/PlatChicBase.png", "assets/images/PlatChicBase.png");
@@ -80,6 +90,8 @@ class AssetData {
 			type.set ("flixel/fonts/monsterrat.ttf", Reflect.field (AssetType, "font".toUpperCase ()));
 			path.set ("flixel/images/ui/button.png", "flixel/images/ui/button.png");
 			type.set ("flixel/images/ui/button.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("flixel/images/logo/default.png", "flixel/images/logo/default.png");
+			type.set ("flixel/images/logo/default.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			
 			
 			initialized = true;

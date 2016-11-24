@@ -40,17 +40,21 @@ class MenuState extends FlxState
 	   
 		playText = new FlxText(0, 0, "PLAY");
 		playText.x = (FlxG.width / 2) - (playText.width / 2);
-		playText.y = FlxG.height - playText.height - 10;
+		playText.y = FlxG.height - playText.height - 20;
 		add(playText);
 		
 		image = new FlxSprite();
-		image.makeGraphic(32, 32, 0xFFFFFFFF);
-		image.x = (FlxG.width / 2) - image.width / 2 ;
-		image.y = 100;
+		image.loadGraphic(AssetPaths.P2A__png, true, 18, 26);
+		image.animation.add("ani", [0, 1, 0, 2], 10, true);
+		image.animation.play("ani");
+		image.x = playText.x + playText.width + 5;
+		image.y = playText.y - 1;
 		add(image);
 		
 		optionPointer = new FlxSprite();
-		optionPointer.makeGraphic(30,10,0xFFF7FE2E);
+		optionPointer.loadGraphic(AssetPaths.P1A__png, true, 19, 27);
+		optionPointer.animation.add("ani", [0, 1, 0, 2], 10, true);
+		optionPointer.animation.play("ani");
 		optionPointer.x = playText.x - optionPointer.width - 5;
 		optionPointer.y = playText.y - 1;
 		add(optionPointer);
