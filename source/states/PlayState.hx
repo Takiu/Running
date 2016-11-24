@@ -24,9 +24,7 @@ class PlayState extends FlxState
 	public var scroll:Bool = true;
 	private var scoreText:FlxText;
 	private var highScoreText:FlxText;
-	private var turretFireTimer:FlxTimer;
 	private var themeSong:FlxSound;
-	private var powerUpSound:FlxSound;
 	private var plataforms:FlxTypedGroup<Plataform>;
 	private var plataFondo:FlxTypedGroup<FlxSprite>;
 	private var ene: FlxTypedGroup<Ene1>;
@@ -36,11 +34,20 @@ class PlayState extends FlxState
 	private var eneSpawn : Bool = true;
 	private var xRecorrido : Float = 0;
 	private var fondo : FlxSprite;
+	private var jumpSound : FlxSound;
+	private var hitSound : FlxSound;
+	private var caidaSound : FlxSound;
+	private var golpeSound : FlxSound;
 	
 	override public function create():Void
 	{
 		super.create();
-		
+		themeSong = FlxG.sound.load(AssetPaths.MuteCity__wav, 1, true);
+		themeSong.play();
+		hitSound = FlxG.sound.load(AssetPaths.Hit__wav, 1, false);
+		jumpSound = FlxG.sound.load(AssetPaths.Jump__wav, 1, false);
+		caidaSound = FlxG.sound.load(AssetPaths.Caida__wav, 1, false);
+		golpeSound = FlxG.sound.load(AssetPaths.Randomize__wav,1,false);
 		fondo = new FlxSprite(0,0);
 		fondo.loadGraphic(AssetPaths.BackgroundCity__png, false, 512, 240);
 		add(fondo);
@@ -107,7 +114,13 @@ class PlayState extends FlxState
 			{				
 				player.velocity.y = -320;
 				player.animation.play("Jump");
-			}			
+				jumpSound.play();
+			}
+			if (FlxG.keys.pressed.X){
+				golpeSound.play();
+				player.animation.play("Punch");
+				player.punchActivate = true;
+			}
 		}
 		
 		if (timePlat >= 140)
@@ -231,6 +244,9 @@ class PlayState extends FlxState
 				enemy.kill;
 				Reg.score++;
 				UpdateScore();
+				hitSound.play();
+				player.punchActivate = true;
+				player.animation.play("Punch");
 			}
 			return true;
 		}		
@@ -265,9 +281,13 @@ class PlayState extends FlxState
 		{
 			player.x = newScroll.x + Reg.ScreenWidth - player.width;	
 		}
-		if (player.x < newScroll.x)
+		if (play2.x < newScroll.x)
 		{
-			player.x = newScroll.x;
+			player.x = newScroll.x + play2.width;
+		}
+		if (player.y > 200)
+		{			
+			caidaSound.play();
 		}
 		if (player.y > newScroll.y + Reg.ScreenHeight + player.height)
 		{

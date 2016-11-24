@@ -10,6 +10,7 @@ import flixel.addons.editors.ogmo.FlxOgmoLoader;
 import flixel.tile.FlxTilemap;
 import flixel.util.FlxColor;
 import flixel.FlxObject;
+import flixel.system.FlxSound;
 
 class MenuState extends FlxState
 {
@@ -18,11 +19,14 @@ class MenuState extends FlxState
 	private var playText:FlxText;
 	private var optionPointer:FlxSprite;
 	private var image:FlxSprite;
+	private var sound: FlxSound;
 	
 	override public function create():Void
 	{
 		FlxG.camera.fade(FlxColor.BLACK, 1, true);
 		super.create();
+		sound = FlxG.sound.load(AssetPaths.Intro__wav, 0.5, true);
+		sound.play();
 		NameTxt = new FlxText(20, 50, 0, "CityRun", 40);
 		NameTxt.alignment = CENTER;
 		NameTxt.screenCenter(X);

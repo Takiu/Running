@@ -21,6 +21,7 @@ class GameOverState extends FlxState
 	private var replayText:FlxText;
 	private var optionPointer:FlxSprite;
 	private var image:FlxSprite;
+	private var sound : FlxSound;
 	
 	public function new(victory:Bool) 
 	{
@@ -33,7 +34,8 @@ class GameOverState extends FlxState
 		super.create();
 
 		gameOver = new FlxText(20, 50, 0, null, 20);
-		
+		sound = FlxG.sound.load(AssetPaths.Ending__wav, 0.5, true);
+		sound.play();
 		image = new FlxSprite();
 		
 		if (_victory)
