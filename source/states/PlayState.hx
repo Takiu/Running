@@ -44,10 +44,10 @@ class PlayState extends FlxState
 		super.create();
 		themeSong = FlxG.sound.load(AssetPaths.MuteCity__wav, 1, true);
 		themeSong.play();
-		hitSound = FlxG.sound.load(AssetPaths.Hit__wav, 1, false);
-		jumpSound = FlxG.sound.load(AssetPaths.Jump__wav, 1, false);
-		caidaSound = FlxG.sound.load(AssetPaths.Caida__wav, 1, false);
-		golpeSound = FlxG.sound.load(AssetPaths.Randomize__wav,1,false);
+		hitSound = FlxG.sound.load(AssetPaths.Hit__wav, 0.8, false);
+		jumpSound = FlxG.sound.load(AssetPaths.Jump__wav, 0.8, false);
+		caidaSound = FlxG.sound.load(AssetPaths.Caida__wav, 0.8, false);
+		golpeSound = FlxG.sound.load(AssetPaths.Randomize__wav,0.8,false);
 		fondo = new FlxSprite(0,0);
 		fondo.loadGraphic(AssetPaths.BackgroundCity__png, false, 512, 240);
 		add(fondo);

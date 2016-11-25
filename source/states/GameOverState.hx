@@ -38,9 +38,7 @@ class GameOverState extends FlxState
 	{
 		super.create();
 
-		gameOver = new FlxText(20, 50, 0, null, 20);
-		sound = FlxG.sound.load(AssetPaths.Ending__wav, 0.5, true);
-		sound.play();
+		gameOver = new FlxText(20, 50, 0, null, 20);		
 		
 		replayText = new FlxText(0, 0, "REPLAY");
 		replayText.x = (FlxG.width / 2) - (replayText.width / 2);
@@ -49,6 +47,8 @@ class GameOverState extends FlxState
 		
 		if (_victory)
 		{
+			sound = FlxG.sound.load(AssetPaths.Winner__wav, 1, true);
+			sound.play();
 			gameOver.text = "¡¡WINNER!!";
 			m1 = new FlxSprite();
 			m1.loadGraphic(AssetPaths.Player__png, true, 21, 26);
@@ -81,6 +81,8 @@ class GameOverState extends FlxState
 		}
 		else
 		{
+			sound = FlxG.sound.load(AssetPaths.Ending__ogg, 1, true);
+			sound.play();
 			gameOver.text = "GAME OVER";
 			m1 = new FlxSprite();
 			m1.loadGraphic(AssetPaths.Boss__png, false, 17, 28);

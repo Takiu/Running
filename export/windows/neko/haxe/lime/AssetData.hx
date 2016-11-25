@@ -62,14 +62,16 @@ class AssetData {
 			type.set ("assets/images/Player.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/Player2.png", "assets/images/Player2.png");
 			type.set ("assets/images/Player2.png", Reflect.field (AssetType, "image".toUpperCase ()));
-			path.set ("assets/music/Ending.wav", "assets/music/Ending.wav");
-			type.set ("assets/music/Ending.wav", Reflect.field (AssetType, "sound".toUpperCase ()));
+			path.set ("assets/music/Ending.ogg", "assets/music/Ending.ogg");
+			type.set ("assets/music/Ending.ogg", Reflect.field (AssetType, "music".toUpperCase ()));
 			path.set ("assets/music/Intro.wav", "assets/music/Intro.wav");
 			type.set ("assets/music/Intro.wav", Reflect.field (AssetType, "sound".toUpperCase ()));
 			path.set ("assets/music/music-goes-here.txt", "assets/music/music-goes-here.txt");
 			type.set ("assets/music/music-goes-here.txt", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/music/MuteCity.wav", "assets/music/MuteCity.wav");
 			type.set ("assets/music/MuteCity.wav", Reflect.field (AssetType, "sound".toUpperCase ()));
+			path.set ("assets/music/Winner.wav", "assets/music/Winner.wav");
+			type.set ("assets/music/Winner.wav", Reflect.field (AssetType, "sound".toUpperCase ()));
 			path.set ("assets/sounds/Caida.wav", "assets/sounds/Caida.wav");
 			type.set ("assets/sounds/Caida.wav", Reflect.field (AssetType, "sound".toUpperCase ()));
 			path.set ("assets/sounds/Hit.wav", "assets/sounds/Hit.wav");

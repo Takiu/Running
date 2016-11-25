@@ -90,6 +90,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
 		Font.registerFont (__ASSET__flixel_fonts_nokiafc22_ttf);
 		Font.registerFont (__ASSET__flixel_fonts_monsterrat_ttf);
 		
@@ -99,6 +100,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -666,6 +668,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf);
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_monsterrat_ttf);
 		
@@ -721,14 +724,16 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/images/Player.png", AssetType.IMAGE);
 		path.set ("assets/images/Player2.png", "assets/images/Player2.png");
 		type.set ("assets/images/Player2.png", AssetType.IMAGE);
-		path.set ("assets/music/Ending.wav", "assets/music/Ending.wav");
-		type.set ("assets/music/Ending.wav", AssetType.SOUND);
+		path.set ("assets/music/Ending.ogg", "assets/music/Ending.ogg");
+		type.set ("assets/music/Ending.ogg", AssetType.MUSIC);
 		path.set ("assets/music/Intro.wav", "assets/music/Intro.wav");
 		type.set ("assets/music/Intro.wav", AssetType.SOUND);
 		path.set ("assets/music/music-goes-here.txt", "assets/music/music-goes-here.txt");
 		type.set ("assets/music/music-goes-here.txt", AssetType.TEXT);
 		path.set ("assets/music/MuteCity.wav", "assets/music/MuteCity.wav");
 		type.set ("assets/music/MuteCity.wav", AssetType.SOUND);
+		path.set ("assets/music/Winner.wav", "assets/music/Winner.wav");
+		type.set ("assets/music/Winner.wav", AssetType.SOUND);
 		path.set ("assets/sounds/Caida.wav", "assets/sounds/Caida.wav");
 		type.set ("assets/sounds/Caida.wav", AssetType.SOUND);
 		path.set ("assets/sounds/Hit.wav", "assets/sounds/Hit.wav");
@@ -825,9 +830,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		id = "assets/images/Player2.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
-		id = "assets/music/Ending.wav";
+		id = "assets/music/Ending.ogg";
 		path.set (id, id);
-		type.set (id, AssetType.SOUND);
+		type.set (id, AssetType.MUSIC);
 		id = "assets/music/Intro.wav";
 		path.set (id, id);
 		type.set (id, AssetType.SOUND);
@@ -835,6 +840,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
 		id = "assets/music/MuteCity.wav";
+		path.set (id, id);
+		type.set (id, AssetType.SOUND);
+		id = "assets/music/Winner.wav";
 		path.set (id, id);
 		type.set (id, AssetType.SOUND);
 		id = "assets/sounds/Caida.wav";
@@ -893,6 +901,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -1693,6 +1702,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_beep_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_flixel_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_fonts_nokiafc22_ttf extends null { }
@@ -1702,6 +1712,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 #elseif html5
+
 
 
 
