@@ -25,9 +25,9 @@ class MenuState extends FlxState
 	{
 		FlxG.camera.fade(FlxColor.BLACK, 1, true);
 		super.create();
-		sound = FlxG.sound.load(AssetPaths.Intro__wav, 0.5, true);
+		sound = FlxG.sound.load(AssetPaths.Intro__ogg, 0.5, true);
 		sound.play();
-		NameTxt = new FlxText(20, 50, 0, "CityRun", 40);
+		NameTxt = new FlxText(20, 50, 0, "CityRun", 40,true);
 		NameTxt.alignment = CENTER;
 		NameTxt.screenCenter(X);
 		NameTxt.color = 0xFFd8d8d8;
@@ -38,7 +38,7 @@ class MenuState extends FlxState
 		instructionsTxt.screenCenter(X);
 		add(instructionsTxt);
 	   
-		playText = new FlxText(0, 0, "PLAY");
+		playText = new FlxText(0, 0,0, "PLAY",8,true);
 		playText.x = (FlxG.width / 2) - (playText.width / 2);
 		playText.y = FlxG.height - playText.height - 20;
 		add(playText);

@@ -40,14 +40,14 @@ class GameOverState extends FlxState
 
 		gameOver = new FlxText(20, 50, 0, null, 20);		
 		
-		replayText = new FlxText(0, 0, "REPLAY");
+		replayText = new FlxText(0, 0, 0, "REPLAY", 8, true);
 		replayText.x = (FlxG.width / 2) - (replayText.width / 2);
 		replayText.y = FlxG.height - replayText.height - 10;
 		add(replayText);
 		
 		if (_victory)
 		{
-			sound = FlxG.sound.load(AssetPaths.Winner__wav, 1, true);
+			sound = FlxG.sound.load(AssetPaths.Winner__ogg, 1, true);
 			sound.play();
 			gameOver.text = "¡¡WINNER!!";
 			m1 = new FlxSprite();
